@@ -1,1 +1,1 @@
-export const URL =  "https://sem3.fredoku.com";
+export const URL =  "https://sem3.fredoku.com/ca2";

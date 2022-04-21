@@ -1,5 +1,6 @@
 import React, {useEffect, useRef, useState} from 'react'
 import AnimalList from "./AnimalList/AnimalList";
+import {URL} from "../settings";
 
 const Animals = () => {
   const [animal, setAnimal] = useState("");
@@ -14,7 +15,7 @@ const Animals = () => {
 
 
     const getAnimal = async () => {
-        const response = await fetch("http://localhost:8080/api/animal/rand")
+        const response = await fetch(URL + "/api/animal/rand")
         .then(response => response.json())
         .then(data => {
           setAnimal(data.name)
@@ -22,7 +23,7 @@ const Animals = () => {
       }
 
       const getJoke = async () => {
-        const Jokeresponse = await fetch("http://localhost:8080/api/joke/rand")
+        const Jokeresponse = await fetch(URL + "/api/joke/rand")
         .then(response => response.json())
         .then(data => {
           setJoke(data.value)
@@ -30,13 +31,13 @@ const Animals = () => {
       }
 
       const getFunnyAnimal = async () => {
-          const funnyAnimalName = await fetch("http://localhost:8080/api/animal/rand")
+          const funnyAnimalName = await fetch(URL + "/api/animal/rand")
           .then(response => response.json())
           .then(data => {
             setFunnyAnimalName(data.name)
           })
 
-          const funnyAnimalJoke = await fetch("http://localhost:8080/api/joke/rand")
+          const funnyAnimalJoke = await fetch(URL + "/api/joke/rand")
           .then(response => response.json())
           .then(data => {
             setFunnyAnimalJoke(data.value)

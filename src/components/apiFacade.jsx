@@ -1,4 +1,4 @@
-const URL = "http://localhost:8080";
+import {URL} from "../settings";
  
 async function handleHttpErrors(res) {
  if (!res.ok) {

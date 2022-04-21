@@ -14,6 +14,6 @@ rootElement.render(
           <Route path="/" element={<App/>}/>
           <Route path='/user' element={<LoggedIn/>}/>
         </Routes>
-      </BrowserRouter>,
-    </ChakraProvider>
+      </BrowserRouter>
+    </ChakraProvider>,
 )

@@ -1,10 +1,16 @@
-import React, {useState} from 'react'
+import React, {useEffect, useRef, useState} from 'react'
+import AnimalList from "./AnimalList/AnimalList";
 
 const Animals = () => {
   const [animal, setAnimal] = useState("");
   const [joke, setJoke] = useState("");
   const [funnyAnimalName, setFunnyAnimalName] = useState("");
   const [funnyAnimalJoke, setFunnyAnimalJoke] = useState("");
+
+  useEffect(() => {
+      const existingAnimal = localStorage.getItem('animalList');
+      setAnimalList(existingAnimal ? JSON.parse(existingAnimal) : []);
+  }, [])
 
 
     const getAnimal = async () => {
@@ -37,13 +43,25 @@ const Animals = () => {
           })
       }
 
+      const animalText = useRef();
+    const [animalList, setAnimalList] = useState([])
+
+      function addToList(event) {
+          event.preventDefault();
+          if (animal === "") return;
+          const next = [...animalList, animal]
+          setAnimalList(next);
+          localStorage.setItem("animalList", JSON.stringify(next));
+      }
+
 
   return (
     <div style={{marginTop: "2em"}}>
         <div>
             <h4>Click to get an animal!</h4>
             <button onClick={getAnimal}>Get an animal</button>
-            <p>{animal}</p>
+            <p ref={animalText}>{animal}</p>
+            <button onClick={addToList}>Add to list</button>
         </div>
 
         <div style={{marginTop: "2em"}}>
@@ -56,6 +74,10 @@ const Animals = () => {
             <h4>Click here to get a funny animal!</h4>
             <button onClick={getFunnyAnimal}>Get a funny animal</button>
             <p>{funnyAnimalName} says: {funnyAnimalJoke}</p>
+        </div>
+
+        <div style={{marginTop: "2em"}}>
+            <AnimalList animalList={animalList} />
         </div>
     </div>
   )
